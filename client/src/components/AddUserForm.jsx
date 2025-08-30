@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddUserForm = () => {
   const [name, setName] = useState("");
@@ -11,6 +13,12 @@ const AddUserForm = () => {
         name,
         message
       });
+
+      console.log(response);
+      setName("");
+      setMessage("");
+
+      toast.success(response.data.popup);
     }
     catch(err){
       console.log(err)
@@ -26,13 +34,17 @@ const AddUserForm = () => {
           <label className="label">Name</label>
           <input type="text" className="input" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
 
-          <label classNam e="label">Message</label>
+          <label className="label">Message</label>
           <textarea className="textarea" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
 
           <button className="btn btn-neutral mt-4">ADD</button>
         </fieldset>
       </form>
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </>
   )
 }
