@@ -23,6 +23,15 @@ app.post("/adduser", async(req, res) => {
     }
 })
 
+app.get("/getusers", async(req, res) => {
+    try{
+        const users = await User.find();
+        res.status(200).send(users);
+    }
+    catch(err){
+        res.status(404).send(users);
+    }
+})
 
 
 
