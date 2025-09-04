@@ -29,7 +29,23 @@ app.get("/getusers", async(req, res) => {
         res.status(200).send(users);
     }
     catch(err){
-        res.status(404).send(users);
+        res.status(404).send(err);
+    }
+})
+
+app.put("/updateuser/:id", async(req, res) => {
+    try{
+        const id = req.params.id;
+        const { editName, editMessage } = req.body;
+
+        console.log(editName);
+        console.log(id);
+
+        await User.updateOne({_id: id}, {$set: {name: editName, message: editMessage}});
+        res.status(200).send({message: "Updated Successfully"});
+    }
+    catch(err){
+        res.status(404).send(err);
     }
 })
 
