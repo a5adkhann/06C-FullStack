@@ -50,6 +50,18 @@ app.put("/updateuser/:id", async(req, res) => {
 })
 
 
+app.delete("/deleteuser/:id", async(req, res) => {
+    try{
+        const id = req.params.id;
+        await User.deleteOne({_id: id});
+        res.status(200).send({popup: "Deleted Successfully"});
+    }
+    catch(err){
+        res.status(404).send(err);
+    }
+})
+
+
 
 
 app.listen(3000, () => {

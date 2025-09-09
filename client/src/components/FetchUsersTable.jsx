@@ -48,6 +48,22 @@ const FetchUsersTable = () => {
     }
   } 
 
+  const handleDelete = async(id) => {
+    try{
+      const response = await axios.delete(`http://localhost:3000/deleteuser/${id}`);
+      console.log(response);
+
+      toast.success(response.data.popup, {
+        iconTheme: {
+          primary: "red"
+        }
+      });
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
 
   return (
     <>
@@ -95,7 +111,7 @@ const FetchUsersTable = () => {
                       :
                       <>
                         <button className="btn btn-soft btn-info" onClick={() => handleEdit(u)}>Edit</button>
-                        <button className="btn btn-soft btn-error">Delete</button>
+                        <button className="btn btn-soft btn-error" onClick={() => handleDelete(u._id)}>Delete</button>
                       </>
                   }
 
