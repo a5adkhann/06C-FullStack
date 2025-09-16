@@ -1,7 +1,9 @@
 const express = require("express");
 const User = require("./models/userModel");
+const Registeration = require("./models/registerationsModel");
 const connectDB = require("./config/db_connection");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 const app = express();
 
 app.use(cors());
@@ -60,6 +62,22 @@ app.delete("/deleteuser/:id", async(req, res) => {
         res.status(404).send(err);
     }
 })
+
+
+
+app.post("/register", async(req, res) => {
+    try{
+        const {name, email, password} = req.body;
+
+        const hashPassword = await bcrypt.hash(password, 10);
+        await Registeration.insertOne({name, email, password: hashPassword});
+    }
+    catch(err){
+        console.log(err);
+    }
+})
+
+
 
 
 

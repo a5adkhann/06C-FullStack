@@ -2,19 +2,24 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FetchUsers from './pages/FetchUsers'
 import AddUser from './pages/AddUser'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import AppLayout from './AppLayout'
+import Register from './pages/Register'
+import Login from './pages/Login'
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
         <Routes>
-          <Route path="/" element={<FetchUsers />}></Route>
-          <Route path="/adduser" element={<AddUser />}></Route>
+          <Route path="/" element={<AppLayout />}>
+            <Route path="/" element={<FetchUsers />}></Route>
+            <Route path="/adduser" element={<AddUser />}></Route>
+          </Route>
+
+
+          <Route path='/register' element={<Register/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   )
