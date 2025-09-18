@@ -77,6 +77,29 @@ app.post("/register", async(req, res) => {
     }
 })
 
+app.post("/login", async(req, res) => {
+    try{
+        const {email, password} = req.body;
+
+        const registeredUser = await Registeration.findOne({email: email});
+        if(registeredUser){
+            const isMatch = await bcrypt.compare(password, registeredUser.password);
+            if(isMatch){
+                res.status(200).send({message: "Logged in", registeredUser});
+            }
+            else {
+                res.status(200).send({message: "Incorrect Password"});
+            }
+        }
+        else {
+            res.status(200).send({message: "User don't exist"});
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+})
+
 
 
 
