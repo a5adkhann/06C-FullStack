@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
-const AppLayout = () => {
+const AppLayout = ({logoutUser}) => {
   return (
     <>
-        <Navbar/>
+        <Navbar logoutUser ={logoutUser}/>
             <Outlet/>
         <Footer/>
     </>
