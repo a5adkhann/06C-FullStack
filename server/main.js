@@ -63,8 +63,6 @@ app.delete("/deleteuser/:id", async(req, res) => {
     }
 })
 
-
-
 app.post("/register", async(req, res) => {
     try{
         const {name, email, password} = req.body;

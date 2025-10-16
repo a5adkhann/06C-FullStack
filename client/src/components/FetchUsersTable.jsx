@@ -7,6 +7,7 @@ const FetchUsersTable = () => {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState("");
   const [editMessage, setEditMessage] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -21,7 +22,7 @@ const FetchUsersTable = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [users])
+  }, [refresh])
 
   const handleEdit = (u) => {
     setEditingId(u._id);
@@ -42,6 +43,7 @@ const FetchUsersTable = () => {
       setEditingId(null);
 
       toast.success(response.data.message);
+      setRefresh(!refresh);
     }
     catch(err){
       console.log(err);
